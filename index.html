@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barra de Rolagem Personalizada</title>
+
+<style>
+/* Barra de rolagem */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Fundo da barra */
+::-webkit-scrollbar-track {
+    background: #5C1514;
+}
+
+/* Parte que desliza */
+::-webkit-scrollbar-thumb {
+    background: #a16e6d /* Vermelho vinho */
+    border-radius: 10px;
+}
+
+/* Efeito ao passar o mouse */
+::-webkit-scrollbar-thumb:hover {
+    background: #410404;
+}
+</style>
+
+</head>
+<body>
+
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odonto Fácil - Clínica Odontológica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Cabeçalho */
+        header {
+            background: linear-gradient(135deg, #722f37 0%, #5C1514 100%);
+            color: rgb(255, 255, 255);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+            justify-content: center;
+        }
+
+        header nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+            text-align: left;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: opacity 0.3s;
+        }
+
+        header nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #823116;
+            color: rgb(104, 27, 24);
+            text-align: left;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100vh;
+            object-fit: leftr;
+            display: block;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            margin: 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* Seções */
+        section {
+            padding: 60px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+
+        section h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        section h3 {
+            font-size: 20px;
+            color: #5C1514;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Sobre */
+        .sobre {
+            background: linear-gradient(135deg, #722f37 0%, #5C1514 100%);
+        }
+
+        .sobre h2 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .sobre p {
+            font-size: 16px;
+            text-align: justify;
+            margin-bottom: 15px;
+            color: white;
+            line-height: 1.8;
+        }
+
+        /* Diferenciais */
+        .diferenciais {
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+        }
+
+        .diferenciais h2 {
+            color: #722f37;
+            text-shadow: none;
+        }
+
+        /* Serviços */
+        .servicos {
+            background: linear-gradient(135deg, #f8f7f7 0%, #ffffff 100%);
+        }
+
+        .servicos h2 {
+            color: #722f37;
+            text-shadow: none;
+        }
+
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            max-width: 1200px;
+        }
+
+        .servico-card {
+            background: linear-gradient(135deg, #ede5e5 0%, #ded8d8 100%);
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 5px solid #722f37;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .servico-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(114, 47, 55, 0.2);
+        }
+
+        .servico-card h3 {
+            color: #5C1514;
+            margin-top: 0;
+        }
+
+        /* Cards de diferenciais */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+            max-width: 1200px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid #722f37;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #5C1514;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            background: linear-gradient(135deg, #722f37 0%, #5C1514 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-block;
+            margin: 30px auto;
+            transition: opacity 0.3s;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            opacity: 0.9;
+        }
+
+        /* Valores */
+        .valores {
+            background: linear-gradient(135deg, #722f37 0%, #5C1514 100%);
+        }
+
+        .valores h2 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .valores-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .valores-table thead {
+            background: linear-gradient(135deg, #5C1514 0%, #722f37 100%);
+            color: white;
+        }
+
+        .valores-table th {
+            padding: 20px 15px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .valores-table tbody tr {
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+
+        .valores-table tbody tr:nth-child(odd) {
+            background-color: #fafafa;
+        }
+
+        .valores-table tbody tr:nth-child(even) {
+            background-color: white;
+        }
+
+        .valores-table tbody tr:hover {
+            background-color: #f0e8e8;
+        }
+
+        .valores-table td {
+            padding: 18px 15px;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .valores-table td:first-child {
+            font-weight: 600;
+            color: #722f37;
+            width: 30%;
+        }
+
+        .valores-table td:last-child {
+            text-align: right;
+            font-weight: 700;
+            color: #5C1514;
+            font-size: 16px;
+        }
+
+        .valores-table tbody tr:hover td:last-child {
+            color: #722f37;
+        }
+
+        /* Depoimentos */
+        .depoimentos {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+        }
+
+        .depoimentos h2 {
+            color: #722f37;
+            text-shadow: none;
+        }
+
+        .depoimentos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            max-width: 1200px;
+        }
+
+        .depoimento-card {
+            background-color: #f9f3f3;
+            padding: 25px;
+            border-radius: 8px;
+            border-top: 4px solid #722f37;
+        }
+
+        .section-inner {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* Contato */
+        .contato {
+            background: linear-gradient(135deg, #722f37 0%, #5C1514 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contato h2 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .contato p {
+            font-size: 18px;
+            margin: 15px 0;
+            color: white;
+        }
+
+        .whatsapp-link {
+            background-color: #25d366;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 10px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .whatsapp-link:hover {
+            background-color: #20c354;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #6e262c;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 22px;
+            }
+
+            header nav ul {
+                gap: 15px;
+            }
+
+            .hero h2 {
+                font-size: 28px;
+            }
+
+            section h2 {
+                font-size: 28px;
+            }
+
+            .servicos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <nav class="container">
+            <div class="brand">
+                <img src="logo 5.png" alt="Capa Odonto Fácil" class="hero-img" style="width: 50px; height: auto;">
+                <h1>Odonto Fácil</h1>
+            </div>
+            <ul>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#diferenciais">Diferenciais</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#valores">Valores</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <img src="capa3.png" alt="Capa Odonto Fácil" class="hero-img">
+    </section>
+
+    <section id="sobre" class="sobre">
+        <div class="container">
+            <h2>Sobre a Clínica</h2>
+            <p>
+                Fundada em 2026 com o propósito de trazer novamente a sua confiança de sorrir, a clínica surgiu a partir 
+                do sonho de oferecer um atendimento odontológico mais acessível e de alta qualidade para toda a comunidade. 
+                Desde a sua fundação, buscamos transformar a experiência dos pacientes, proporcionando um ambiente acolhedor 
+                e tratamentos modernos que garantem saúde e estética para o sorriso.
+            </p>
+            <p>
+                Ao longo dos anos, conquistamos a confiança de nossos pacientes por meio de um atendimento ético, transparente 
+                e focado em resultados duradouros. Nosso compromisso é evoluir constantemente, acompanhando as inovações da 
+                odontologia para oferecer sempre o melhor.
+            </p>
+        </div>
+    </section>
+
+    <section id="diferenciais" class="diferenciais">
+        <div class="container">
+            <h2>Nossos Diferenciais</h2>
+            <div class="card-grid">
+            <div class="card">
+                <h3>Atendimento Personalizado</h3>
+                <p>Equipe dedicada que trata cada paciente com empatia e planos de tratamento pensados especificamente para suas necessidades.</p>
+            </div>
+            <div class="card">
+                <h3>Tecnologia Avançada</h3>
+                <p>Equipamentos modernos garantem diagnósticos mais precisos e tratamentos com maior conforto e eficácia.</p>
+            </div>
+            <div class="card">
+                <h3>Ambiente Confortável</h3>
+                <p>Consultório acolhedor e ambiente tranquilo para tornar sua consulta mais segura e agradável.</p>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicos" class="servicos">
+        <div class="container">
+            <h2>Nossos Serviços</h2>
+            <div class="servicos-grid">
+            <div class="servico-card">
+                <h3>Clínica Geral</h3>
+                <p>Atendimento completo e acompanhamento da saúde bucal</p>
+            </div>
+            <div class="servico-card">
+                <h3>Limpeza</h3>
+                <p>Limpeza profissional para manutenção da saúde dos dentes</p>
+            </div>
+            <div class="servico-card">
+                <h3>Clareamento Dental</h3>
+                <p>Procedimento seguro para um sorriso mais branco e brilhante</p>
+            </div>
+            <div class="servico-card">
+                <h3>Implantodontia</h3>
+                <p>Implantes dentários com tecnologia moderna</p>
+            </div>
+            <div class="servico-card">
+                <h3>Ortodontia</h3>
+                <p>Correção de alinhamento dos dentes com aparelhos modernos</p>
+            </div>
+            <div class="servico-card">
+                <h3>Endodontia</h3>
+                <p>Tratamento de canal com precisão e conforto</p>
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <a href="#contato" class="cta-button">Agende sua Avaliação</a>
+        </div>
+        </div>
+    </section>
+
+    <section id="depoimentos" class="depoimentos">
+        <div class="container">
+            <h2>Depoimentos de Nossos Pacientes</h2>
+            <div class="depoimentos-container">
+            <div class="depoimento-card">
+                <p><strong>⭐⭐⭐⭐⭐ Maria Silva</strong></p>
+                <p>"Atendimento excelente! A equipe é muito atenciosa e os resultados são incríveis."</p>
+            </div>
+            <div class="depoimento-card">
+                <p><strong>⭐⭐⭐⭐⭐ João Santos</strong></p>
+                <p>"Recomendo muito! Clínica moderna com profissionais competentes e preços justos."</p>
+            </div>
+            <div class="depoimento-card">
+                <p><strong>⭐⭐⭐⭐⭐ Ana Costa</strong></p>
+                <p>"Transformou meu sorriso! Estou muito feliz com o tratamento realizado aqui."</p>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="valores" class="valores">
+        <div class="container">
+            <h2>Valores dos Tratamentos</h2>
+            <table class="valores-table">
+            <thead>
+                <tr>
+                    <th>Serviço</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Clínica Geral</td>
+                    <td>Consulta/Avaliação</td>
+                    <td>R$ 100 a R$ 250</td>
+                </tr>
+                <tr>
+                    <td>Clínica Geral</td>
+                    <td>Limpeza Profissional</td>
+                    <td>R$ 150 a R$ 400</td>
+                </tr>
+                <tr>
+                    <td>Clínica Geral</td>
+                    <td>Restauração (por dente)</td>
+                    <td>R$ 150 a R$ 500</td>
+                </tr>
+                <tr>
+                    <td>Ortodontia</td>
+                    <td>Avaliação Completa</td>
+                    <td>R$ 100 a R$ 200</td>
+                </tr>
+                <tr>
+                    <td>Ortodontia</td>
+                    <td>Aparelho Fixo Metálico (Instalação)</td>
+                    <td>R$ 600 a R$ 1.500</td>
+                </tr>
+                <tr>
+                    <td>Ortodontia</td>
+                    <td>Manutenção Mensal</td>
+                    <td>R$ 150</td>
+                </tr>
+                <tr>
+                    <td>Ortodontia</td>
+                    <td>Alinhadores Invisíveis</td>
+                    <td>R$ 5.000 a R$ 15.000</td>
+                </tr>
+                <tr>
+                    <td>Clareamento Dental</td>
+                    <td>Clareamento no Consultório</td>
+                    <td>R$ 900 a R$ 2.000</td>
+                </tr>
+                <tr>
+                    <td>Implantodontia</td>
+                    <td>Implante Unitário</td>
+                    <td>R$ 3.500 a R$ 8.000</td>
+                </tr>
+                <tr>
+                    <td>Implantodontia</td>
+                    <td>Prótese Fixa Simples</td>
+                    <td>R$ 1.500 a R$ 5.000</td>
+                </tr>
+                <tr>
+                    <td>Implantodontia</td>
+                    <td>Arcada Completa</td>
+                    <td>R$ 12.000 a R$ 35.000</td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="contato" class="contato">
+        <div class="container">
+            <h2>Agende sua Consulta</h2>
+            <p>Entre em contato e marque sua avaliação!</p>
+            <a href="https://wa.me/5534997710945" class="whatsapp-link">
+                📱 WhatsApp: +55 (34) 99771-0945
+            </a>
+            <p style="margin-top: 20px; font-size: 16px;">Segunda a Sexta: 08h às 18h</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Odonto Fácil. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
