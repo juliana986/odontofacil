@@ -6,7 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Barra de Rolagem Personalizada</title>
 
+incluir<meta>
+
 <style>
+    
 /* Barra de rolagem */
 ::-webkit-scrollbar {
     width: 12px;
@@ -27,6 +30,7 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #410404;
 }
+
 </style>
 
 </head>
@@ -65,7 +69,7 @@
             top: 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             z-index: 1000;
-            justify-content: center;
+            justify-content: left;
         }
 
         header nav {
@@ -139,13 +143,8 @@
             margin-bottom: 30px;
         }
 
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            width: 100%;
-        }
+       
+        
 
         /* Seções */
         section {
@@ -432,17 +431,25 @@
         footer {
             background-color: #6e262c;
             color: white;
-            text-align: center;
+            text-align: center; 
             padding: 20px;
             margin-top: 40px;
         }
-
+        
+       
+        }
+    
         /* Responsivo */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 22px;
-            }
-
+        .container {
+            display:flex;
+            flex-direction:column;
+            width: 100%;
+        }
+@media (max-width: 768px) {
+.container {
+            flex-direction: row;
+}
+        
             header nav ul {
                 gap: 15px;
             }
