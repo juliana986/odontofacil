@@ -441,10 +441,17 @@ incluir<meta>
     
         /* Responsivo */
         .container {
-            display:flex;
-            flex-direction:column;
+            display: flex;
+            flex-direction: column;
             width: 100%;
         }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
 
             header nav ul {
                 gap: 15px;
@@ -462,10 +469,7 @@ incluir<meta>
                 grid-template-columns: 1fr;
             }
         }
-        @media (max-width: 768px) {
-.container {
-            flex-direction: row;
-}
+       
     </style>
 </head>
 <body>
