@@ -19,7 +19,10 @@ incluir<meta>
 ::-webkit-scrollbar-track {
     background: #5C1514;
 }
-
+@media (max-width: 768px) {
+.container {
+            flex-direction: row;
+}
 /* Parte que desliza */
 ::-webkit-scrollbar-thumb {
     background: #a16e6d /* Vermelho vinho */
@@ -445,11 +448,7 @@ incluir<meta>
             flex-direction:column;
             width: 100%;
         }
-@media (max-width: 768px) {
-.container {
-            flex-direction: row;
-}
-        
+
             header nav ul {
                 gap: 15px;
             }
