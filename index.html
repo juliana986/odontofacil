@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Barra de Rolagem Personalizada</title>
 
-incluir<meta>
+
 
 <style>
     
@@ -79,6 +79,8 @@ incluir<meta>
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-direction: column;
+            width: 100%;
         }
 
         .brand {
@@ -437,7 +439,7 @@ incluir<meta>
         }
         
        
-        }
+        
     
         /* Responsivo */
         .container {
@@ -446,13 +448,13 @@ incluir<meta>
             width: 100%;
         }
 
-        @media (max-width: 768px) {
+             @media (max-width: 768px) {
             .container {
                 flex-direction: row;
                 flex-wrap: wrap;
                 justify-content: center;
             }
- @media (min-width: 768px) {
+            @media (min-width: 768px) {
             .container {
                 flex-direction: row;
                
